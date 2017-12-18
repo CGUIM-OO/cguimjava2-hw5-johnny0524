@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class Person {
-	private ArrayList<Card> oneRoundCard;
+	private ArrayList<Card> oneRoundCard  = new ArrayList<>();
 	public void setOneRoundCard(ArrayList<Card> cards){
 		oneRoundCard=cards;
 	}
@@ -16,7 +16,8 @@ public abstract class Person {
 			if (Ace_count == 0 && c.getRank() == 1) {
 				Ace_count = 1;
 				continue;
-			} else {
+			} 
+			else {
 				if (c.getRank() == 11 || c.getRank() == 12 || c.getRank() == 13)
 					total_value += 10;
 				else

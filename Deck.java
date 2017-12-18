@@ -44,23 +44,21 @@ public class Deck{
 		nUsed=0;
 	}
 	public Card getOneCard(boolean isOpened){
-		if(isOpened == true){
-			if (cards.size()>0){
-				Card givecard;
-				givecard= cards.get(0);
-				usedCard.add(givecard);
-				cards.remove(0);
-				nUsed ++;
-				return givecard;
-			}
-			else {
-				shuffle();
-				getOneCard(true);
-				return null;
-			}
-		}
-		else return null;
+		if(cards.size()!= 0){
+			nUsed = nUsed + 1;
+		    Card card = cards.get(0);
+		    usedCard.add(card);
+		    cards.remove(0);
+		    if(isOpened == true) openCard.add(card);
+		    return card;
+	    }
+		else{
+			shuffle();
+		    getOneCard(isOpened);
+	    }
+		return null;
 	}
+
 	public void printDeck(){
 		int n ;
 		for(n=0 ; n<cards.size(); n++)

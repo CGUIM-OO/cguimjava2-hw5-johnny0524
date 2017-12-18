@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class Person {
-	private ArrayList<Card> oneRoundCard  = new ArrayList<>();
+	private ArrayList<Card> oneRoundCard = new ArrayList<>();
 	public void setOneRoundCard(ArrayList<Card> cards){
 		oneRoundCard=cards;
 	}

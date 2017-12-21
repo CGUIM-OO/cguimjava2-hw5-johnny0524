@@ -60,6 +60,7 @@ public class Table {
 			Player a = player[i];
 			boolean hit=false;
 			do{
+				if(a.getTotalValue()>21) break;
 				hit=a.hit_me(this);
 				if(hit){
 					a.getOneRoundCard().add(putcard.getOneCard(true));
@@ -72,13 +73,11 @@ public class Table {
 				}
 				else{
 					System.out.println(a.getName()+", Pass hit!");
-					System.out.println(a.getName()+", Final Card:");
-					for(Card c : a.getOneRoundCard()){
-						c.printCard();
-					}
+					
 				}
 			}while(hit);
-		}
+			System.out.println(a.getName()+"'s hit is over!");
+		}			
 	}
 	private void ask_dealer_about_hits(){
 		boolean hit=false;
@@ -106,26 +105,29 @@ public class Table {
 		int x = 0;
 		System.out.println("Dealer's card value is "+dealer.getTotalValue()+" ,Cards:");
 		for(Card card :cards){
-			card.printCard();
-		}
+			card.printCard();}
 		for(x= 0 ; x < MAXPLAYER ; x++){
 			Player a = player[x];
+			System.out.println(a.getName()+"'s Cards :");
+			for(Card card: a.getOneRoundCard()){
+				card.printCard();}
+			System.out.print(a.getName()+"card value is:"+a.getTotalValue());
 			if(dealer.getTotalValue()>21 && a.getTotalValue()>21){
-				System.out.println("Need another game");
+				System.out.println(",chips have no change! The Chips now is: "+a.getCurrentChips());
 			}else if(dealer.getTotalValue()<=21&&a.getTotalValue()>21){
-				System.out.println("Dealer wins the game");
 				a.increaseChips(-pos_betArray[x]);
+				System.out.println(",Loss "+pos_betArray[x]+" Chips, the Chips now is:"+a.getCurrentChips());
 			}else if(dealer.getTotalValue()>21&&a.getTotalValue()<=21){
-				System.out.println(a.getName()+" wins the game");
 				a.increaseChips(pos_betArray[x]);
+				System.out.println(",win "+pos_betArray[x]+" Chips, the Chips now is:"+a.getCurrentChips());
 			}else if(dealer.getTotalValue()>a.getTotalValue()&&dealer.getTotalValue()<=21){
-				System.out.println("Dealer wins the game");
 				a.increaseChips(-pos_betArray[x]);
+				System.out.println(",Loss "+pos_betArray[x]+" Chips, the Chips now is:"+a.getCurrentChips());
 			}else if(dealer.getTotalValue()<a.getTotalValue()&&a.getTotalValue()<=21){
-				System.out.println(a.getName()+" wins the game");
 				a.increaseChips(pos_betArray[x]);
+				System.out.println(",win "+pos_betArray[x]+" Chips, the Chips now is:"+a.getCurrentChips());
 			}else{
-				System.out.println("Need another game");
+				System.out.println(",chips have no change! The Chips now is: "+a.getCurrentChips());
 			}
 		}
 	}
@@ -140,3 +142,7 @@ public class Table {
 		calculate_chips();
 	}
 }
+//System.out.println(a.getName()+", Final Card:");
+//for(Card c : a.getOneRoundCard()){
+	//c.printCard();
+//}
